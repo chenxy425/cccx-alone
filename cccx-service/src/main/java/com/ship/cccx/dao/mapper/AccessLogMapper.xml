@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ship.cccx.dao.mapper.AccessLogMapper">
+  <resultMap id="BaseResultMap" type="com.ship.cccx.dao.model.AccessLog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="access_token" jdbcType="VARCHAR" property="accessToken" />
+    <result column="creattime" jdbcType="TIMESTAMP" property="creattime" />
+    <result column="expires_in" jdbcType="INTEGER" property="expiresIn" />
+    <result column="logintime" jdbcType="TIMESTAMP" property="logintime" />
+    <result column="loginuser" jdbcType="VARCHAR" property="loginuser" />
+    <result column="loginuserId" jdbcType="INTEGER" property="loginuserId" />
+    <result column="veriMobile" jdbcType="VARCHAR" property="veriMobile" />
+    <result column="vericode" jdbcType="VARCHAR" property="vericode" />
+    <result column="vericodeExpired" jdbcType="VARCHAR" property="vericodeExpired" />
+    <result column="device_token" jdbcType="VARCHAR" property="deviceToken" />
+    <result column="system" jdbcType="VARCHAR" property="system" />
+    <result column="version" jdbcType="VARCHAR" property="version" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="kickofftime" jdbcType="TIMESTAMP" property="kickofftime" />
+  </resultMap>
+  <sql id="base_column_list">
+    id, access_token, creattime, expires_in, logintime, loginuser, loginuserId, veriMobile, vericode, vericodeExpired, device_token, system, version, status, kickofftime
+  </sql>
+  <insert id="insert" parameterType="com.ship.cccx.dao.model.AccessLog" keyProperty="id" useGeneratedKeys="true">
+    <!--<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>-->
+    insert into userext (access_token, creattime, expires_in, logintime, loginuser, loginuserId, veriMobile, vericode, vericodeExpired, device_token, system, version, status, kickofftime)
+    values (#{accessToken,jdbcType=VARCHAR},#{creattime,jdbcType=TIMESTAMP},#{expiresIn,jdbcType=INTEGER},#{logintime,jdbcType=TIMESTAMP},#{loginuser,jdbcType=VARCHAR},#{loginuserId,jdbcType=INTEGER},#{veriMobile,jdbcType=VARCHAR},#{vericode,jdbcType=VARCHAR},#{vericodeExpired,jdbcType=VARCHAR},#{deviceToken,jdbcType=VARCHAR},#{system,jdbcType=VARCHAR},#{version,jdbcType=VARCHAR},#{status,jdbcType=INTEGER},#{kickofftime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="update" parameterType="com.ship.cccx.dao.model.AccessLog">
+     UPDATE
+    <set>
+      <if test="accessToken != null">
+        access_token=#{accessToken,jdbcType=VARCHAR}
+      </if>
+      <if test="creattime != null">
+        creattime=#{creattime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="expiresIn != null">
+        expires_in=#{expiresIn,jdbcType=INTEGER}
+      </if>
+      <if test="logintime != null">
+        logintime=#{logintime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="loginuser != null">
+        loginuser=#{loginuser,jdbcType=VARCHAR}
+      </if>
+      <if test="loginuserId != null">
+        loginuserId=#{loginuserId,jdbcType=INTEGER}
+      </if>
+      <if test="veriMobile != null">
+        veriMobile=#{veriMobile,jdbcType=VARCHAR}
+      </if>
+      <if test="vericode != null">
+        vericode=#{vericode,jdbcType=VARCHAR}
+      </if>
+      <if test="vericodeExpired != null">
+        vericodeExpired=#{vericodeExpired,jdbcType=VARCHAR}
+      </if>
+      <if test="deviceToken != null">
+        device_token=#{deviceToken,jdbcType=VARCHAR}
+      </if>
+      <if test="system != null">
+        system=#{system,jdbcType=VARCHAR}
+      </if>
+      <if test="version != null">
+        version=#{version,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null">
+        status=#{status,jdbcType=INTEGER}
+      </if>
+      <if test="kickofftime != null">
+        kickofftime=#{kickofftime,jdbcType=TIMESTAMP}
+      </if>
+  </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="delete" parameterType="com.ship.cccx.dao.model.AccessLog">
+     DELETE FROM accesslog WHERE id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="findByAccessToken" resultType="com.ship.cccx.dao.model.AccessLog">
+      SELECT <include refid="base_column_list"/> FROM accesslog WHERE access_token = #{accessToken, jdbcType=VARCHAR}
+  </select>
+  <select id="findByLoginuserId" resultType="com.ship.cccx.dao.model.AccessLog">
+    SELECT <include refid="base_column_list"/> FROM accesslog WHERE loginuserId = #{loginuserId, jdbcType=VARCHAR}
+  </select>
+
+</mapper>

@@ -1,0 +1,14 @@
+.idea
+*.iml
+generatorConfig.xml
+out
+gen
+.classpath
+.project
+*.eml
+target
+*.log
+*.log.*
+*.cache
+*.lock
+cccx-common/src/main/resources/email.properties
